@@ -63,7 +63,7 @@ def palindromePermutaion(string):
 		else:
 			return False
 
-#check if 2 strings are one character away from being the same
+#1.5 check if 2 strings are one character away from being the same
 def oneAway(string1, string2):
 	differences = 0
 	if(len(string1) >= len(string2)):
@@ -75,7 +75,6 @@ def oneAway(string1, string2):
 				return True
 			else:
 				return False
-		#FIX
 		elif len(string1) - len(string2) == 1:
 			for i in range(len(string2)):
 				if string1[i] != string2[i]:
@@ -97,7 +96,6 @@ def oneAway(string1, string2):
 				return True
 			else:
 				return False
-		#FIX
 		elif len(string2) - len(string1) == 1:
 			for i in range(len(string1)):
 				if string1[i] != string2[i]:
@@ -110,6 +108,20 @@ def oneAway(string1, string2):
 		else:
 			return False
 	
+#1.6 String compression using the counts of repeated characters
+def stringCompression(string):
+	compressed = ""
+	for i in range(len(string)):
+		if i >= len(string):
+			break
+		n = i
+		count = 0
+		while n < len(string) and string[n] == string[i]:
+			count = count + 1
+			n = n + 1
+		compressed = compressed + string[i] + str(count)
+		string = string.replace(string[i],'', count-1)
+	return compressed
 
 #CHAPTER 1 TESTING - chose to take input so others could test
 SELECT = input("Choose a function for testing: \n" + "1. isUnique\n"
@@ -117,6 +129,7 @@ SELECT = input("Choose a function for testing: \n" + "1. isUnique\n"
 	 + "3. URLify\n"
  	 + "4. palindromePermutation\n"
  	 + "5. oneAway\n"
+ 	 + "6. stringCompression\n"
 	 + "\n")
 
 
@@ -166,3 +179,10 @@ elif SELECT == '5':
 		print("\nis one away\n")
 	else:
 		print("\nis not one away\n")
+
+#1.6
+elif SELECT == '6':
+
+	t1 = input("\nTesting for stringCompression. \nEnter a string: ")
+	
+	print("\n" + stringCompression(t1)+ "\n")
