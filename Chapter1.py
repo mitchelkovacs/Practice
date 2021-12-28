@@ -2,7 +2,6 @@
 #Practice questions from "Cracking the Coding Interview"
 #Chapter 1 - Arrays and Strings
 
-
 #1.1 Determine if a String has all unique characters without additional data structures
 def isUnique(string):
 	for i in range(len(string)):
@@ -64,14 +63,60 @@ def palindromePermutaion(string):
 		else:
 			return False
 
+#check if 2 strings are one character away from being the same
+def oneAway(string1, string2):
+	differences = 0
+	if(len(string1) >= len(string2)):
+		if len(string1) - len(string2) == 0:
+			for i in range(len(string1)):
+				if string1[i] != string2[i]:
+					differences = differences + 1
+			if differences == 1:
+				return True
+			else:
+				return False
+		#FIX
+		elif len(string1) - len(string2) == 1:
+			for i in range(len(string2)):
+				if string1[i] != string2[i]:
+					string1 = string1.replace(string1[i], '', 1)
+					differences = differences + 1
+			if differences == 1 or differences == 0:
+				return True
+			else:
+				return False
 
-
+		else:
+			return False
+	else:
+		if len(string2) - len(string1) == 0:
+			for i in range(len(string2)):
+				if string1[i] != string2[i]:
+					differences = differences + 1
+			if differences == 1:
+				return True
+			else:
+				return False
+		#FIX
+		elif len(string2) - len(string1) == 1:
+			for i in range(len(string1)):
+				if string1[i] != string2[i]:
+					string2 = string2.replace(string2[i], '', 1)
+					differences = differences + 1
+			if differences == 1 or differences == 0:
+				return True
+			else:
+				return False
+		else:
+			return False
+	
 
 #CHAPTER 1 TESTING - chose to take input so others could test
 SELECT = input("Choose a function for testing: \n" + "1. isUnique\n"
 	 + "2. checkPermutation\n"
 	 + "3. URLify\n"
  	 + "4. palindromePermutation\n"
+ 	 + "5. oneAway\n"
 	 + "\n")
 
 
@@ -111,3 +156,13 @@ elif SELECT == '4':
 		print("\nis a permutation of a palindrome\n")
 	else:
 		print("\nis not a permutation of a palindrome\n")
+
+#1.5
+elif SELECT == '5':
+
+	t1, t2= input("\nTesting for oneAway. \nEnter two strings: ").split()
+	
+	if oneAway(t1, t2):
+		print("\nis one away\n")
+	else:
+		print("\nis not one away\n")
